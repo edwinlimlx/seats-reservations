@@ -1,0 +1,48 @@
+{
+  "name": "seats-reservations",
+  "version": "1.0.0",
+  "description": "Realtime Seats reservations/Reservation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pre-commit": "cp scripts/base/configs.default.js scripts/base/configs.js",
+    "start": "cp scripts/base/configs.dev.js scripts/base/configs.js && parcel index.html admin.html"
+  },
+  "pre-commit": [
+    "pre-commit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edwinlimlx/seats-reservations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edwinlimlx/seats-reservations/issues"
+  },
+  "homepage": "https://github.com/edwinlimlx/seats-reservations#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "autoprefixer": "^9.5.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "postcss-modules": "^1.4.1",
+    "pre-commit": "^1.2.2",
+    "sass": "^1.17.3"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.4.0",
+    "assets": "^3.0.1",
+    "bootstrap": "4.3.1",
+    "fabric": "^2.7.0",
+    "firebase": "^5.9.0",
+    "gsap": "^2.1.2",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
+    "popper.js": "1.14.7",
+    "uuid": "^3.3.2"
+  }
+}

@@ -1,0 +1,53 @@
+.card--theater {
+  .inner {
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    min-height: 300px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    box-shadow: none;
+    margin-bottom: 1rem;
+    &:hover {
+      box-shadow: 0 5px #ddd;
+    }
+
+    @include media-breakpoint-up(lg) {
+      min-height: 200px;
+    }
+    @include media-breakpoint-up(xl) {
+      min-height: 160px;
+    }
+  }
+}
+
+.card--theater-add {
+  .inner {
+    border: 3px dashed #f2f2f2;
+    background: transparent;
+    &:before {
+      content: '+';
+      font-size: 72px;
+      color: #f2f2f2;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      text-shadow: 0;
+      transition: all 0.3s ease-out;
+    }
+    &:hover {
+      border-color: map-get($colors, 'primary');
+      &:before {
+        color: map-get($colors, 'primary');
+        text-shadow: 0 5px #ddd;
+      }
+    }
+  }
+}
+
+.card--theater__header {
+}
+
+.card--theater__footer {
+}

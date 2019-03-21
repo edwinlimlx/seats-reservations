@@ -1,0 +1,190 @@
+<html>
+<body>
+  <div class="page-loader fade show d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary align-middle" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-lg-2 col-xl-1 col-2 d-none d-md-block sidebar sidebar-dark bg-black">
+        <div class="sidebar-sticky">
+          <div class="sidebar__logo">
+            <img src="https://via.placeholder.com/600x200?text=Logo" title="Brand Name" />
+          </div>
+          <ul class="nav flex-column" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="nav-dashboard-tab" data-toggle="tab" href="#nav-dashboard" role="tab" aria-controls="nav-dashboard" aria-selected="true">
+                <i class="fas fa-home"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="nav-theaters-tab" data-toggle="tab" href="#nav-theaters" role="tab" aria-controls="nav-theaters" aria-selected="true">
+                <i class="fas fa-people-carry"></i>
+                Theaters
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <main role="main" class="col-lg-10 col-xl-11 ml-sm-auto">
+        <div class="tab-content" id="nav-tabContent">
+          <!-- start dashboard-tab -->
+          <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel" aria-labelledby="nav-dashboard-tab">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Dashboard</h1>
+            </div>
+
+            <div class="row px-3 theaters__cards"></div>
+          </div>
+          <!-- end dashboard-tab -->
+          <!-- start theaters-tab -->
+          <div class="tab-pane fade" id="nav-theaters" role="tabpanel" aria-labelledby="nav-theaters-tab">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Theaters</h1>
+            </div>
+          </div>
+          <!-- end theaters-tab -->
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal--theater" tabindex="-1" role="dialog" aria-labelledby="modal--theater-title" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal--theater-title">Theater</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex">
+            <div class="flex-grow-1">
+              <canvas id="modal--theater__canvas" height="600"></canvas>
+            </div>
+            <div id="modal--theater__panel" class="border-left pl-3">
+              <div id="modal--theater__details" class="row">
+                <div class="col-sm-12">
+                  <div class="form-group mb-2">
+                    <label for="name" class="small mb-0">Name</label>
+                    <input type="text" class="form-control form-control-sm" id="name" placeholder="Theater #" value="" title="" />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group mb-2">
+                    <label for="country" class="small mb-0">country</label>
+                    <select id="country" class="form-control form-control-sm">
+                      <option value="0">NA</option>
+                      <option value="1">SG</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group mb-2">
+                    <label for="location" class="small mb-0">location</label>
+                    <select id="location" class="form-control form-control-sm">
+                      <option value="0">NA</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row modal--theater__seats">
+                <div class="col-sm-12">
+                  <small>Seats</small>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <button class="btn btn-primary btn-block btn-add">Add</button>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <button class="btn btn-danger btn-block btn-remove">Remove</button>
+                </div>
+              </div>
+              <div id="modal--theater__seat-details" class="border-top pt-2 mt-3"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-save" aria-label="Save">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hidden">
+    <script type="text/x-handlebars-template" id="template__theater-details">
+      <div class="form-group mb-2">
+        <label for="uid" class="small mb-0">uid</label>
+        <input type="text" class="form-control form-control-sm" id="uid" placeholder="uid" disabled aria-disabled="true" value="<%= uid %>" title="<%= uid %>">
+      </div>
+      <div class="form-group mb-2">
+        <label for="category" class="small mb-0">category</label>
+        <select id="category" class="form-control form-control-sm">
+          <option value="0" <% if (category === 0) { %>selected<% } %> >-</option>
+          <option value="1" <% if (category === 1) { %>selected<% } %> >CAT 1</option>
+          <option value="2" <% if (category === 2) { %>selected<% } %> >CAT 2</option>
+          <option value="3" <% if (category === 3) { %>selected<% } %> >CAT 3</option>
+          <option value="4" <% if (category === 4) { %>selected<% } %> >CAT 4</option>
+          <option value="5" <% if (category === 5) { %>selected<% } %> >CAT 5</option>
+          <option value="6" <% if (category === 6) { %>selected<% } %> >CAT 6</option>
+          <option value="7" <% if (category === 7) { %>selected<% } %> >CAT 7</option>
+          <option value="8" <% if (category === 8) { %>selected<% } %> >CAT 8</option>
+        </select>
+      </div>
+      <div class="form-group mb-2">
+        <label for="zone" class="small mb-0">zone</label>
+        <select id="zone" class="form-control form-control-sm">
+          <option value="0" <% if (zone === 0) { %>selected<% } %> >-</option>
+          <option value="1" <% if (zone === 1) { %>selected<% } %> >Zone A</option>
+          <option value="2" <% if (zone === 2) { %>selected<% } %> >Zone B</option>
+          <option value="3" <% if (zone === 3) { %>selected<% } %> >Zone C</option>
+          <option value="4" <% if (zone === 4) { %>selected<% } %> >Zone D</option>
+          <option value="5" <% if (zone === 5) { %>selected<% } %> >Zone E</option>
+          <option value="6" <% if (zone === 6) { %>selected<% } %> >Zone F</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <div class="form-group mb-2">
+            <label for="row" class="small mb-0">row</label>
+            <input type="text" class="form-control form-control-sm" id="row" placeholder="row" value="<%= row %>" title="<%= row %>">
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-group mb-2">
+            <label for="col" class="small mb-0">col</label>
+            <input type="text" class="form-control form-control-sm" id="col" placeholder="col" value="<%= col %>" title="<%= col %>">
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-2 form-check">
+        <input type="checkbox" class="form-check-input" id="isHandicap">
+        <label class="form-check-label small" for="isHandicap">isHandicap</label>
+      </div>
+      <div class="form-group mb-2">
+        <label for="status" class="small mb-0">status</label>
+        <select id="status" class="form-control form-control-sm">
+          <option>status</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="type" class="small mb-0">type</label>
+        <select id="type" class="form-control form-control-sm">
+          <option>type</option>
+        </select>
+      </div>
+    </script>
+    <script type="text/x-handlebars-template" id="template__card--theater">
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 card--theater <%= classes %>" <% if (typeof uid !== 'undefined') { %>data-uid="<%= uid %>" <% } %> >
+        <div class="inner d-flex flex-column" <% if (typeof image !== 'undefined' && !_.isEmpty(image)) { %>style="background:url('<%= image %>');"<% } %> >
+          <div class="text-center pt-2 card--theater__header"></div>
+          <div class="text-center flex-grow-1 card--theater__body"></div>
+          <div class="text-center pb-2 card--theater__footer"><%= name %></div>
+        </div>
+      </div>
+    </script>
+  </div>
+  <script src="./admin.js"></script>
+</body>
+</html>
